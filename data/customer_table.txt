@@ -1,3 +1,3 @@
-1 Sam Weinstein
-2 Sinara Arliss
-3 Carolyn Tambini
+1 Sam Weinstein 111-11-1111 "88 Jefferson Rd, Lambertville, NJ" [1,2]
+2 Sinara Arliss 111-11-1111 "lisadjfklsdajf" [3, 4]
+3 Carolyn Tambini 111-11-1111 "adkfghjlkasdjf" [5,6]
