@@ -6,7 +6,7 @@ class Customer
       @@next_customer_id = line.match(/(\d+)/)[0].to_i + 1
     end
   end
-
+  attr_accessor :this_first_name, :this_last_name, :this_ssn, :this_address
   def initialize(first_name = nil, last_name = nil, ssn = nil, address = nil)
     @this_first_name = first_name
     @this_last_name = last_name
@@ -57,8 +57,20 @@ class Customer
   end
   def save
     customer_data = retrieve_data(@this_customer_id)
+    file = customer_data['file']
+    file.rewind
+    lines = file.readlines
+    lines[customer_data['matches'][0].to_i-1] = "#{@this_customer_id} #{@this_first_name} #{@this_last_name} #{@this_ssn} \"#{@this_address}\" #{@this_accounts}"
+    file.close #sorry
+    file = File.open(File.dirname(__FILE__) + '/data/customer_table.txt', 'w')
+    file.puts(lines)
+
+
+
+    # puts str
     if customer_data
-      puts customer_data['file']
+
+      # print file.readlines
     end
   end
 
@@ -66,4 +78,5 @@ end
 # c = Customer.new('Sam', 'Weinstein', '123-45-6789', '12345 Bruh Moment Drive, New York, New York')
 d = Customer.new
 d.find_by_id(1)
+d.this_first_name = "AAAAAAAAAAAAA"
 d.save
