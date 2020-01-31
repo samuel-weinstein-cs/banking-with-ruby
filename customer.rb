@@ -13,16 +13,17 @@ class Customer
     @this_ssn = ssn
     @this_address = address
     @this_customer_id = @@next_customer_id
-    @@next_customer_id += 1
     @this_accounts = []
     save if !(first_name == nil || last_name == nil || ssn == nil || address == nil)
+    @@next_customer_id += 1
+
 
   end
 
   def retrieve_data(customer_id)
     file = File.open(File.dirname(__FILE__) + '/data/customer_table.txt', 'r')
-    puts customer_id, @@next_customer_id
-    if customer_id+1 < @@next_customer_id
+    # puts customer_id+1, @@next_customer_id
+    if customer_id+1 <= @@next_customer_id
       match = nil
       lines = file.readlines
       lines.each do |line|
@@ -62,7 +63,7 @@ class Customer
   def save
     customer_data = retrieve_data(@this_customer_id)
 
-    puts customer_data
+    # puts customer_data
     file = customer_data['file']
     file.rewind
     lines = file.readlines
